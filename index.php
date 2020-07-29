@@ -1,4 +1,9 @@
-
+<?php
+session_start();
+if($_SESSION['user']){
+    header('Location: ../profile.php');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,30 +13,39 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 </head>
 <body>
-<?php
-if (isset($_POST['done'])){
-    $email =$_POST['email'];
-    echo "<div class='container-fluid text-center mt-5'> Hello, $email </div>";
 
-}else{
-
-?>
     <div class="container">
-        <form action="" method="post">
+        <form action="Scripts/signin.php" method="post">
             <div class="form-group">
                 <label for="email">Email address</label>
                 <input name="email"  type="email" class="form-control" id="email" aria-describedby="emailHelp">
-                <small id="emailHelp" class="form-text text-muted">Please, input your email!</small>
+                <small class="form-text text-muted">Please, input your email!</small>
+                <?php
+                if($_SESSION['email']){
+                    ?>
+                <small class = "form-text text-danger"> Your email is invalid!</small>
+                <?php
+                }
+                $_SESSION['email'] = false;
+                ?>
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" class="form-control" id="password">
+                <input name="password"  type="password" class="form-control" id="password">
+                <?php
+                if($_SESSION['password']){
+                    ?>
+                    <small class = "form-text text-danger"> Your password is invalid!</small>
+                    <?php
+                    $_SESSION['password'] = false;
+                }
+                ?>
             </div>
-            <button type="submit" class="btn btn-primary" name="done">Submit</button>
-        </form>    </div>
-<?php
-}
-?>
+            <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+            <a style="text-decoration: none;" href="register.php">Registration</a>
+        </form>
+    </div>
+
 </body>
 </html>
 
