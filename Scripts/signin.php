@@ -1,39 +1,17 @@
 <?php
+session_start();
+include "connection.php";
 
-$users = [
-"maxhanyn@ukr.net" => [
-"firstName" => "Max",
-"secondName" => "Hanyn",
-"password" => "12345"
-],
+$email = trim($_POST['email']);
+$password = md5(trim($_POST['password']));
 
-"katok@ukr.net" => [
-"firstName" => "Andriy",
-"secondName" => "Katok",
-"email" => "katok@ukr.net",
-"password" => "qwer"
-],
-
-"kostyk@ukr.net" => [
-"firstName" => "Anton",
-"secondName" => "Kostyk",
-"email" => "kostyk@ukr.net",
-"password" => "kostyk"
-]
-];
-
-
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-$query = http_build_query($_POST);
-    if ($users[$email] && $users[$email]['password'] == $password) {
-        header('Location: profile.php'."?".$query);
-        exit();
-    }
-    if (!$users[$email]) {
-        $isEmailValid = true;
-
-    }
-    if ($users[$email]['password'] != $password) {
-        $isPasswordValid = true;
-    }
+$check_data = mysqli_query( $link, "SELECT * FROM users_pofiles WHERE user_id = (SELECT user_id FROM users WHERE email = '$email' AND password = '$password')" );
+$user = mysqli_fetch_assoc($check_data);
+//echo @count($user);
+if(@count($user) > 0) {
+    $_SESSION['user'] = $user;
+    header("Location: ../profile.php");
+}else {
+    $_SESSION['wrongData'] = true;
+    header('Location: http://phpteam.test/');
+}
