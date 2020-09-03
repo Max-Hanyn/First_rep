@@ -1,10 +1,8 @@
 <?php
-//session_start();
-//if (!$_SESSION['user']){
-//    header('Location: http://phpteam.test/');
-//}
+session_start();
+include "Views/layouts/header.php";
 ?>
-<?php include "layouts/header.php"; ?>
+
 <body>
 <br><br><br>
 
@@ -83,7 +81,7 @@
                         <ul id="myTab" class="nav nav-pills">
                             <li class="active"><a href="#detail" data-toggle="tab">Особисті дані </a></li>
                             <li class=""><a href="#contact" data-toggle="tab">Редагувати дані </a></li>
-                            <li class=""><a href="../Scripts/logout.php" >Вихід</a></li>
+                            <li class=""><a href="profile/logout" >Вихід</a></li>
                         </ul>
                         <div id="myTabContent" class="tab-content">
                             <hr>

@@ -1,4 +1,4 @@
-#<Files *.php>
+#<Files *autoload.php>
 #    Order Deny,Allow
 #    Deny from all
 #</Files>
@@ -8,11 +8,11 @@
 #    Allow from all
 #</Files>
 
-#<FilesMatch "\.php$">
+#<FilesMatch "\autoload.php$">
 #    Order Allow,Deny
 #    Deny from all
 #</FilesMatch>
-#<FilesMatch "index[0-9]?\.php$">
+#<FilesMatch "index[0-9]?\autoload.php$">
 #    Order Allow,Deny
 #    Allow from all
 #</FilesMatch>

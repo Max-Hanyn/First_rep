@@ -1,24 +1,19 @@
 <?php
 session_start();
-if($_SESSION['user']){
-    header('Location: ../profile');
-}
+include "Views/layouts/header.php";
 ?>
-<?php include "layouts/header.php"; ?>
-
 <body>
-
 <div class="container">
-    <form action="/register/registration" method="post">
+    <form action="" method="post">
         <div class="form-group">
             <label for="firstName">First name</label>
             <input name="firstName"  type="text" class="form-control" id="firstName">
             <?php
-            if($_SESSION['onlyLettersName']){
+            if($_SESSION['incorrectData']){
                 ?>
                 <small class = "form-text text-danger"> Name must consist only letters!</small>
                 <?php
-                $_SESSION['onlyLettersName'] = false;
+
             }
             ?>
         </div>
@@ -26,11 +21,11 @@ if($_SESSION['user']){
             <label for="secondName">Second name</label>
             <input name="secondName"  type="text" class="form-control" id="secondName">
             <?php
-            if($_SESSION['onlyLettersSecondName']){
+            if($_SESSION['incorrectData']){
                 ?>
                 <small class = "form-text text-danger"> Second name must consist only letters!</small>
                 <?php
-                $_SESSION['onlyLettersSecondName'] = false;
+
             }
             ?>
         </div>
@@ -43,8 +38,9 @@ if($_SESSION['user']){
                 ?>
                 <small class = "form-text text-danger"> Email already exists!</small>
                 <?php
-                $_SESSION['emailExists'] = false;
+
             }
+            $_SESSION=[];
             ?>
                    </div>
         <div class="form-group">

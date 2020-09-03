@@ -1,5 +1,5 @@
 <?php
-include "layouts/header.php";
+
 ?>
 <body>
 

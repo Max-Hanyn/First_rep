@@ -1,10 +1,13 @@
 <?php
 session_start();
 if($_SESSION['user']){
-    header('Location: ../profile.php');
+    header('Location: ../profile');
+
+
 }
+include "Views/layouts/header.php";
 ?>
-<?php include "layouts/header.php"; ?>
+
 <body>
 
 <div class="container">
@@ -16,7 +19,7 @@ if($_SESSION['user']){
         $_SESSION['registersuccessful'] = false;
     }
     ?>
-    <form action="home/test" method="post">
+    <form action="" method="post">
         <div class="form-group">
             <label for="email">Email address</label>
             <input name="email"  type="email" class="form-control" id="email" aria-describedby="emailHelp">
@@ -42,7 +45,7 @@ if($_SESSION['user']){
             ?>
         </div>
         <button type="submit" class="btn btn-primary" name="submit">Submit</button>
-        <a style="text-decoration: none;" href="register.php">Registration</a>
+        <a style="text-decoration: none;" href="register">Registration</a>
     </form>
 </div>
 
