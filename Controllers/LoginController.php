@@ -19,16 +19,18 @@ public function login(){
 
       $user = $userModel->getUser($email,$password);
 
+
 //      print_r($user);
 //      exit();
     if($user){
 //        $user = $userModel->getById($userId);
-        $_SESSION['user']['id'] = $user['id'];
-        if ($user['verified'] == null){
+        $userId = $user[0]['id'];
+        $_SESSION['user']['id'] = $userId;
+        if ($user[0]['verified'] == null){
             Route::redirect('verify');
         }
-        $_SESSION['user']['roleId'] = $user['role_id'];
-        Route::redirect("profile");
+        $_SESSION['user']['roleId'] = $user[0]['role_id'];
+        Route::redirect("profile/$userId");
 
     }else{
         $_SESSION['wrongData'] = true;

@@ -11,12 +11,16 @@ class AuthService
      * @param string $password
      * @return mixed
      */
-    public static function createNewUser($email,$password){
+    public static function createNewUser($firstName,$secondName,$email,$password){
+        $userProfileMode = new UserProfileModel();
 
         $newUser = new UserModel();
         $token = EmailVerifyService::createToken();
         EmailVerifyService::sendMailVerification($email,$token);
-        return $newUser->addUser($email,$password,$token);
+        $id = $newUser->addUser($email,$password,$token);
+        $userProfileMode->insert(['first_name' => $firstName,'second_name' => $secondName, 'user_id' => $id])->execute();
+        return $id;
+
     }
 
 
@@ -34,6 +38,8 @@ class AuthService
         if($_SESSION['user']){
             return true;
         }else {
+
+            Route::redirect('login');
 
         }
 

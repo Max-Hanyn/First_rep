@@ -1,5 +1,9 @@
 <?php
+
 //session_start();
+if ($_GET['url'] == 'index.php'){
+    $_GET['url'] = '/';
+}
 include 'autoload.php';
 include 'Routes/Routes.php';
 //$user = new UserModel();

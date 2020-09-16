@@ -100,13 +100,14 @@ abstract class ModelBase
      * @return mixed
      */
     public function execute(){
-
+//
 //        print_r($this->sql);
 //        exit();
         $query = $this->link->prepare($this->sql);
         $query->execute($this->data);
         $this->sql=[];
         $this->data=[];
+//        foreach ()
         return $query->fetchall();
     }
 
@@ -119,5 +120,12 @@ abstract class ModelBase
         $sql = ("SELECT {$columns} FROM `{$this->getTable()}`");
         $this->sql = $sql;
         return $this;
+    }
+    public function innerJoin(string $table, string $firstColumn, string $secondColumn){
+
+        $this->sql.= "JOIN $table ON {$this->getTable()}.$secondColumn = $table.$firstColumn ";
+        return $this;
+
+
     }
 }

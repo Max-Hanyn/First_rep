@@ -81,7 +81,7 @@ include "Views/layouts/header.php";
                         <ul id="myTab" class="nav nav-pills">
                             <li class="active"><a href="#detail" data-toggle="tab">Особисті дані </a></li>
                             <li class=""><a href="#contact" data-toggle="tab">Редагувати дані </a></li>
-                            <li class=""><a href="profile/logout" >Вихід</a></li>
+                            <li class=""><a href="logout" >Вихід</a></li>
                         </ul>
                         <div id="myTabContent" class="tab-content">
                             <hr>
@@ -89,10 +89,10 @@ include "Views/layouts/header.php";
                                 <h4>История профиля</h4>
                                 <table class="table table-th-block">
                                     <tbody>
-                                    <tr><td class="active">Ім'я:</td><td><?=$_SESSION['user']['first_name']?></td></tr>
-                                    <tr><td class="active">Фамілія:</td><td><?=$_SESSION['user']['second_name']?></td></tr>
-                                    <tr><td class="active">Адрес:</td><td><?=$_SESSION['user']['number']?></td></tr>
-                                    <tr><td class="active">Номер телефону:</td><td><?=$_SESSION['user']['adress']?></td></tr>
+                                    <tr><td class="active">Ім'я:</td><td><?=$pageData['first_name']?></td></tr>
+                                    <tr><td class="active">Фамілія:</td><td><?=$pageData['second_name']?></td></tr>
+                                    <tr><td class="active">Адрес:</td><td><?=$pageData['number']?></td></tr>
+                                    <tr><td class="active">Номер телефону:</td><td><?=$pageData['adress']?></td></tr>
                                     </tbody>
                                 </table>
                             </div>

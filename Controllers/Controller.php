@@ -2,9 +2,17 @@
 session_start();
 class Controller
 {
-    public function view($viewName){
-        $test = "hello";
+    public function view($viewName,array $data = null){
+        if ($data){
 
+            foreach ($data as $variable){
+
+              $key = array_search($variable,$data);
+              $$key = $variable[0];
+
+        }}
+
+        $pageData = $data;
         include "Views/$viewName.php";
     }
     public function checkUserRole($checkRole){

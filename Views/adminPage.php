@@ -1,38 +1,60 @@
 <?php
 include "layouts/header.php";
-$userModel = new UserModel();
-$userRolesModel = new UsersRolesModel();
-$roleModel = new RolesModel();
-echo $test;
-
 ?>
 <table class="table">
     <thead>
     <tr>
         <th scope="col">id</th>
         <th scope="col">email</th>
-        <th scope="col">roles</th>
+        <th scope="col">verification</th>
+        <th scope="col">role</th>
     </tr>
     </thead>
     <tbody>
 
         <?php
-//        $allUsers = $userModel->getAllUsers();
-        $allUsers = $userModel->getById(35);
-        print_r($allUsers);
-        foreach ($allUsers as $user){
 
+        foreach ($users as $user){
             ?>
         <tr>
-            <td scope="row"><?= $user ?></td>
-            <td><?= $user ?></td>
-            <td><?php
-//                $roles = $userRolesModel->getRole($user['id']);
-//                foreach ($roles as $role) {
-//                    echo $roleModel->getRoleById($role)." ";
-//
-//                }
-                ?></td>
+            <td><?= $user['id'] ?></td>
+            <td><?= $user['email'] ?></td>
+            <td><?php if($user['verified']){
+                echo 'verefied';
+                }else{
+                ?>
+                    <a href="verify/<?php echo $user['token']; ?>">Verify</a>
+                <?php
+
+                }   ?></td>
+            <td><?= $user['name'] ?>
+                <?php
+                if ($_SESSION['user']['roleId'] == RolesModel::ROLE_ADMIN_ID){
+
+
+                ?>
+                <form action="admin/changerole" method="post">
+                    <p><select size="3"  name="role">
+                            <option disabled>Roles</option>
+
+                            <?php
+                            foreach ($roles as $role){
+                            ?>
+                            <option value="<?=$role['id'] ?>"><?=$role['name'] ?>
+
+                                <?php
+                                }
+                                ?>
+                                <input type="hidden" name="userId" value="<?=$user['id'] ?>"">
+                        </select></p>
+                    <p><input type="submit" value="Add role"></p>
+                </form>
+                <?php
+                }
+                ?>
+
+            </td>
+            <td><a href="admin/edit/<?php echo $user['id'] ?>">Edit</a></td>
         </tr>
             <?php
         }

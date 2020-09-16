@@ -28,4 +28,9 @@ class RolesModel extends ModelBase
         $query->execute([':id' => $roleId]);
         return $query->fetch(PDO::FETCH_ASSOC)['name'];
     }
+
+    public function getUserRole($id){
+
+        return $this->select('name')->innerJoin('users','role_id','id')->where('users.id',"$id")->execute();
+    }
 }

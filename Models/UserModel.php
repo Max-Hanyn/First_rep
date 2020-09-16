@@ -38,5 +38,8 @@ class UserModel extends ModelBase
 //            ]);
 //        return $query->fetch(PDO::FETCH_ASSOC)['id'];
     }
+    public function allUsers(){
+        return $this->select()->execute();
+}
 
 }
