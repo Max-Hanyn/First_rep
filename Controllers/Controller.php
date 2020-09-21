@@ -27,13 +27,15 @@ class Controller
       Route::redirect('forbidden');
     }
     public function isLoggedOut(){
-        if(empty($_SESSION['user'])) {
+        if($_SESSION['user']['roleId'] == RolesModel::ROLE_GUEST_ID) {
+
             Route::redirect('login');
         }
     }
     public function isLoggedIn(){
-        if(!empty($_SESSION['user'])) {
-            Route::redirect('profile');
+        if(Roles::checkRole(RolesModel::ROLE_USER_ID)) {
+            $id = $_SESSION['user']['id'];
+            Route::redirect("profile/$id");
         }
     }
 

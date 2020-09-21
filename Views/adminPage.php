@@ -1,5 +1,6 @@
 <?php
 include "layouts/header.php";
+include "layouts/navigataion.php";
 ?>
 <table class="table">
     <thead>
@@ -29,7 +30,7 @@ include "layouts/header.php";
                 }   ?></td>
             <td><?= $user['name'] ?>
                 <?php
-                if ($_SESSION['user']['roleId'] == RolesModel::ROLE_ADMIN_ID){
+                if (Roles::checkRole(RolesModel::ROLE_ADMIN_ID)){
 
 
                 ?>

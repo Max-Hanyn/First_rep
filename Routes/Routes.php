@@ -9,14 +9,15 @@
 //});
 
 
-Route::set('profile/logout', 'ProfileController.logout');
+Route::set('profile/logout', 'ProfileController.logout',RolesModel::ROLE_USER_ID);
 Route::set('/', 'HomeController.index');
 //Route::set('profile', 'ProfileController.index', RolesModel::ROLE_USER_ID);
 Route::set('profile/:id', 'ProfileController.index',RolesModel::ROLE_USER_ID);
 Route::set('verify', 'VerifyController.index');
 Route::set('verify/resent', 'VerifyController.resent');
 Route::set('verify/:token', 'VerifyController.verify');
-Route::set('profile/:id/:name', 'ProfileController.checkUser');
+Route::set('profile/:id/skills', 'ProfileController.skills',RolesModel::ROLE_USER_ID);
+Route::set('profile/:id/skills/add', 'ProfileController.add',RolesModel::ROLE_USER_ID);
 Route::set('profile/rere/rere/:id', 'ProfileController.index', RolesModel::ROLE_USER_ID);
 Route::set('admin', 'AdminController.index', RolesModel::ROLE_ADMIN_ID);
 Route::set('admin/edit/:id', 'AdminController.edit', RolesModel::ROLE_ADMIN_ID);

@@ -51,7 +51,7 @@ class Route
         return false;
     }
 
-    public static function set($routeToAdd, $controller, $roleId = null)
+    public static function set($routeToAdd, $controller, $roleId = RolesModel::ROLE_GUEST_ID)
     {
 
         $routeAndParams = self::checkParams($routeToAdd);
@@ -89,12 +89,16 @@ class Route
             $key = key($route);
 
 
+
             if (preg_match("#\A$key\z#", $_GET['url'])) {
-//                echo 'q';
+//                    print_r($_SESSION);
+//                        print_r($route[$key]['roleId']);
+//                    exit();
 
                // echo "f";
-//                print_r($_SESSION);
-                if($route[$key]['roleId'] == $_SESSION['user']['roleId'] || $_SESSION['user']['roleId'] == RolesModel::ROLE_ADMIN_ID){
+
+                if(Roles::checkRole($route[$key]['roleId']) || $_SESSION['user']['roleId'] == RolesModel::ROLE_ADMIN_ID){
+
 //                    echo "!";
                         $params = self::parseUrl($route[$key]['params']);
                         $controller = new $route[$key]['controller'];
@@ -104,6 +108,7 @@ class Route
                     }else{
 //
                     self::redirect('forbidden');
+
                 }
                 }
 

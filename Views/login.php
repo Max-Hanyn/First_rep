@@ -1,10 +1,6 @@
 <?php
 session_start();
-if($_SESSION['user']){
-    header('Location: ../profile');
 
-
-}
 include "Views/layouts/header.php";
 ?>
 

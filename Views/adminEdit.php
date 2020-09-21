@@ -1,6 +1,6 @@
 <?php
 include "layouts/header.php";
-
+include "layouts/navigataion.php";
 ?>
 <?php if ($massage['edited'])
 {

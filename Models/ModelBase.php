@@ -101,6 +101,8 @@ abstract class ModelBase
      */
     public function execute(){
 //
+
+//        print_r($this->data);
 //        print_r($this->sql);
 //        exit();
         $query = $this->link->prepare($this->sql);
@@ -126,6 +128,10 @@ abstract class ModelBase
         $this->sql.= "JOIN $table ON {$this->getTable()}.$secondColumn = $table.$firstColumn ";
         return $this;
 
-
+    }
+    public function delete(){
+        $sql = ("Delete FROM `{$this->getTable()}`");
+        $this->sql = $sql;
+        return $this;
     }
 }

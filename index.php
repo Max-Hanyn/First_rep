@@ -1,9 +1,14 @@
 <?php
 
-//session_start();
-if ($_GET['url'] == 'index.php'){
+session_start();
+if (empty($_SESSION['user'])){
+    $_SESSION['user']['roleId'] = '0';
+}
+if ($_GET['url'] == ''){
     $_GET['url'] = '/';
 }
+//print_r($_SESSION);
+//exit();
 include 'autoload.php';
 include 'Routes/Routes.php';
 //$user = new UserModel();

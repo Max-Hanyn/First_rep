@@ -3,15 +3,17 @@
 
 class LoginController extends Controller
 {
+
     public function __construct()
     {
-//        $this->isLoggedIn();
+        $this->isLoggedIn();
     }
 
     public function index(){
 
 }
 public function login(){
+
     if (isset($_POST['submit'])) {
     $email = trim($_POST['email']);
     $password = md5(trim($_POST['password']));

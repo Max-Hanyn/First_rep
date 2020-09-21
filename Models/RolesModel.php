@@ -3,8 +3,10 @@
 
 class RolesModel extends ModelBase
 {
+    const ROLE_GUEST_ID = 0;
     const ROLE_USER_ID = 2;
     const ROLE_ADMIN_ID = 1;
+    const ROLE_MODERATOR_ID = 3;
     protected function getTable()
     {
         return "roles";
