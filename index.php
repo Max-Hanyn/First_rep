@@ -7,8 +7,7 @@ if (empty($_SESSION['user'])){
 if ($_GET['url'] == ''){
     $_GET['url'] = '/';
 }
-//print_r($_SESSION);
-//exit();
+
 include 'autoload.php';
 include 'Routes/Routes.php';
 //$user = new UserModel();

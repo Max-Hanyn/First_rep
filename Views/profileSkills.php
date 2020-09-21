@@ -6,11 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bootstrap Table with Add and Delete Row Feature</title>
     <link rel="stylesheet" href="/Views/styles/profile.css">
-
-
-
-<!--    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">-->
-
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -24,7 +19,15 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    Profile <button type="button" class="add-button btn btn-primary" data-toggle="modal" data-target="#profileModal">Add new skill</button>
+                    Profile
+                    <?php
+                    if(AuthService::currentUser($id)){
+
+                    ?>
+                    <button type="button" class="add-button btn btn-primary" data-toggle="modal" data-target="#profileModal">Add new skill</button>
+                        <?php
+                    }
+                    ?>
                 </div>
                 <div class="card-body">
                     <table class="table" id="profileTable">
@@ -33,7 +36,14 @@
                             <th>Name</th>
                             <th>Level</th>
                             <th>Language</th>
+                            <?php
+                            if(AuthService::currentUser($id)){
+
+                            ?>
                             <th>Actions</th>
+                                <?php
+                            }
+                            ?>
                         </tr>
                         </thead>
                         <tbody>
@@ -44,6 +54,10 @@
                             <td><?=$skill['name']?></td>
                             <td><?=$skill['level']?></td>
                             <td><?=$skill['language']?></td>
+                            <?php
+                            if(AuthService::currentUser($id)){
+
+                            ?>
                             <td>
                                 <div>
                                 <button type="button" class="edit btn btn-info" data-toggle="modal" value="<?=$skill['id'] ?>" ><i class="material-icons">&#xE254;</i></button>
@@ -51,6 +65,9 @@
 
 
                                 </div></td>
+                            <?php
+                            }
+                            ?>
 
                         </tr>
                         <?php
@@ -63,7 +80,6 @@
         </div>
     </div>
 </div>
-
 
 
 <div class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

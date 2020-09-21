@@ -34,6 +34,15 @@ class AuthService
             Route::redirect("forbidden");
         }
     }
+    public static function currentUser($id)
+    {
+        if($_SESSION['user']['id'] == $id || $_SESSION['user']['roleId'] == RolesModel::ROLE_ADMIN_ID){
+            return true;
+        } else {
+        return false;
+    }
+    }
+
     public static function loggedIn(){
         if($_SESSION['user']){
             return true;

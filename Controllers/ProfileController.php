@@ -68,7 +68,7 @@ class ProfileController extends Controller {
 
         }
 
-        return $this->view('profileSkills',['skills'=>[$skills]]);
+        return $this->view('profileSkills',['skills'=>[$skills],'id'=>[$id]]);
 
     }
     public function add(){

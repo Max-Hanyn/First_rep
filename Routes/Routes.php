@@ -22,12 +22,7 @@ Route::set('profile/rere/rere/:id', 'ProfileController.index', RolesModel::ROLE_
 Route::set('admin', 'AdminController.index', RolesModel::ROLE_ADMIN_ID);
 Route::set('admin/edit/:id', 'AdminController.edit', RolesModel::ROLE_ADMIN_ID);
 Route::set('admin/changerole', 'AdminController.changeRole', RolesModel::ROLE_ADMIN_ID);
-//Route::set('profile', 'ProfileController.index', RolesModel::ROLE_USER_ID);
 
-//
-
-//
-//
 Route::set('login', 'LoginController.login');
 Route::set('forbidden', 'ForbiddenController.index');
 

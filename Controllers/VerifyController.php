@@ -26,6 +26,7 @@ class VerifyController extends Controller
             if ($_SESSION['user']['roleId'] == RolesModel::ROLE_ADMIN_ID){
                 Route::redirect("admin");
             }
+            $_SESSION['user']['roleId'] = RolesModel::ROLE_USER_ID;
             Route::redirect("profile/$userId");
 
         }
