@@ -14,6 +14,8 @@ Route::set('/', 'HomeController.index');
 //Route::set('profile', 'ProfileController.index', RolesModel::ROLE_USER_ID);
 Route::set('profile/:id', 'ProfileController.index',RolesModel::ROLE_USER_ID);
 Route::set('verify', 'VerifyController.index');
+Route::set('users', 'UserListController.index',RolesModel::ROLE_USER_ID);
+
 Route::set('verify/resent', 'VerifyController.resent');
 Route::set('verify/:token', 'VerifyController.verify');
 Route::set('profile/:id/skills', 'ProfileController.skills',RolesModel::ROLE_USER_ID);
