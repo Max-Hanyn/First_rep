@@ -10,7 +10,7 @@
 
 
 Route::set('profile/logout', 'ProfileController.logout',RolesModel::ROLE_USER_ID);
-Route::set('/', 'HomeController.index');
+Route::set('/', 'LoginController.login');
 //Route::set('profile', 'ProfileController.index', RolesModel::ROLE_USER_ID);
 Route::set('profile/:id', 'ProfileController.index',RolesModel::ROLE_USER_ID);
 Route::set('verify', 'VerifyController.index');

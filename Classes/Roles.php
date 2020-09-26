@@ -25,9 +25,6 @@ private function getRole($roleId){
         foreach ($roles as $permission) {
             if ($permission == $role) {
 
-
-
-
                 return true;
             }
 

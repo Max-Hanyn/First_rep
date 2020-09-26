@@ -28,6 +28,7 @@ $('#profileForm').submit(function (e) {
             },
 
             success:function (response) {
+                console.log("success");
                 var last = response;
                 console.log(last);
 
