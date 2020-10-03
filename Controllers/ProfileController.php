@@ -20,7 +20,6 @@ class ProfileController extends Controller {
       return $this->view('profile',$profileData[0]);
     }
     public function logout(){
-//        echo "!";
         $_SESSION['user'] = [];
         Route::redirect('login');
     }
@@ -57,7 +56,6 @@ class ProfileController extends Controller {
             $name = $_GET['name1'];
             $level = $_GET['level1'];
             $language = $_GET['language1'];
-            $userId = $id;
             $userSkills->updateSkill($name,$level,$language,$idSkill);
             return;
 

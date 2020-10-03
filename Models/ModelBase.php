@@ -104,7 +104,7 @@ abstract class ModelBase
 
 //        print_r($this->data);
 //        print_r($this->sql);
-//        exit();
+////        exit();
         $query = $this->link->prepare($this->sql);
         $query->execute($this->data);
         $this->sql=[];
@@ -134,4 +134,14 @@ abstract class ModelBase
         $this->sql = $sql;
         return $this;
     }
+    public function in(array $array){
+        $values = '';
+        foreach ($array as $key){
+            $values.= $key.',';
+        }
+        $values = substr($values, 0, -1);
+        $this->sql.="IN ($values)";
+        return $this;
+    }
 }
+//SELECT * FROM `users` JOIN users_skills ON users.id = users_skills.user_id WHERE users.email LIKE %gf% OR users.verified LIKE %gf% OR users_skills.level LIKE %gf%

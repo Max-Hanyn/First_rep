@@ -33,17 +33,12 @@ class VerifyController extends Controller
 
     }
     public function resent(){
+
         $user = new UserModel();
         $id = $_SESSION['user']['id'];
-//        echo $id;
         $userData = $user->select()->where('id',$id)->execute();
-//        print_r($userData);
         $email = $userData[0]['email'];
         $token = $userData[0]['token'];
-//        echo $token;
-//        exit();
-//        echo $email;
-//        print_r($_SESSION);
         EmailVerifyService::sendMailVerification($email,$token);
         Route::redirect('verify');
 

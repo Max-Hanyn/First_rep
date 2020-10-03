@@ -3,11 +3,13 @@ session_start();
 class Controller
 {
     public function view($viewName,array $data = null){
+
         if ($data){
 
             foreach ($data as $variable){
 
               $key = array_search($variable,$data);
+
               $$key = $variable[0];
 
         }}
