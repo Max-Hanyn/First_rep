@@ -1,13 +1,13 @@
 <?php
-class HomeController extends Controller {
 
-    public function index(){
+class HomeController extends Controller
+{
 
-//        print_r($_SESSION);
-      $this->View('home');
+    public function index()
+    {
+
+        $this->View('home');
     }
-
-
 
 
 }

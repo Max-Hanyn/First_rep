@@ -1,35 +1,11 @@
-#<Files *autoload.php>
-#    Order Deny,Allow
-#    Deny from all
-#</Files>
-#
-#<Files index.php>
-#    Order Allow,Deny
-#    Allow from all
-#</Files>
 
-#<FilesMatch "\autoload.php$">
-#    Order Allow,Deny
-#    Deny from all
-#</FilesMatch>
-#<FilesMatch "index[0-9]?\autoload.php$">
-#    Order Allow,Deny
-#    Allow from all
-#</FilesMatch>
 RewriteEngine On
-#
 RewriteCond %{REQUEST_FILENAME} !-d
-
-
 RewriteCond %{REQUEST_FILENAME} !-l
-
-#
-
 RewriteEngine On
 RewriteCond %{THE_REQUEST} ^.+?\ [^?]+\.php[?\ ]
 RewriteRule \.php$ - [F]
 RewriteCond %{REQUEST_FILENAME} !-f
-#ErrorDocument 403 http://phpteam.test/forbiden.html
 RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
 
 

@@ -20,23 +20,11 @@ abstract class ModelBase
         $this->link = new PDO('mysql:host=localhost;dbname=users_info', 'root', '');
         return $this;
     }
-//    public function getById($id){
-//        $sql = ("SELECT * FROM `{$this->getTable()}` WHERE ( `id` = :id )");
-//        $query = $this->link->prepare($sql);
-//        $query->execute([':id' => $id]);
-//        return $query->fetch(PDO::FETCH_ASSOC);
-//    }
-//    public function get($params = null){
-//
-//        $sql = ("SELECT * FROM `{$this->getTable()}`");
-//        $query = $this->link->prepare($sql);
-//        $query->execute();
-//        return $query->fetchall();
-//    }
 
     /**
      * @param array $data
      * @return $this
+     * specify columns for update
      */
     public function update(array $data)
     {
@@ -54,9 +42,9 @@ abstract class ModelBase
     /**
      * @param string $where
      * @return $this
+     * specify conditions for sql string
      */
 
-//    where("role_id",$role_id,"token",$token)
     public function where(...$params){
         $where = '';
         $check = true;
@@ -77,6 +65,7 @@ abstract class ModelBase
     /**
      * @param array $data
      * @return $this
+     * specify columns and values to insert
      */
     public function insert(array $data){
 
@@ -98,24 +87,21 @@ abstract class ModelBase
 
     /**
      * @return mixed
+     * execute sql string
      */
     public function execute(){
-//
 
-//        print_r($this->data);
-//        print_r($this->sql);
-//        exit();
         $query = $this->link->prepare($this->sql);
         $query->execute($this->data);
         $this->sql=[];
         $this->data=[];
-//        foreach ()
         return $query->fetchall();
     }
 
     /**
      * @param string $columns
      * @return $this
+     * specify columns to select
      */
     public function select(string $columns = '*'){
 
@@ -129,6 +115,11 @@ abstract class ModelBase
         return $this;
 
     }
+
+    /**
+     * @return $this
+     * delete specified rows
+     */
     public function delete(){
         $sql = ("Delete FROM `{$this->getTable()}`");
         $this->sql = $sql;

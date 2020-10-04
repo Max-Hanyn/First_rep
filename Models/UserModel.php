@@ -13,7 +13,7 @@ class UserModel extends ModelBase
      * @param String $email
      * @return mixed
      */
-    public function checkUser(String $email)
+    public function checkUser(string $email)
     {
         $sql = ("SELECT id FROM `{$this->getTable()}` WHERE ( `email` = :email )");
         $query = $this->link->prepare($sql);
@@ -21,25 +21,25 @@ class UserModel extends ModelBase
         return $query->fetch(PDO::FETCH_ASSOC)['id'];
 
     }
-    public function addUser($email,$password,$token){
 
-        $this->insert(['email'=>$email,'password'=>$password,'token'=>$token])->execute();
+    public function addUser($email, $password, $token)
+    {
+
+        $this->insert(['email' => $email, 'password' => $password, 'token' => $token])->execute();
         return $this->link->lastInsertID();
 
 
     }
-    public function getUser($email,$password){
-        return $this->select()->where("email", $email , "password", $password)->execute();
-//        $sql = ("SELECT id FROM `{$this->getTable()}` WHERE ( `email` = :email AND `password` =:password)");
-//        $query = $this->link->prepare($sql);
-//        $query->execute([
-//            ':email' => $email,
-//            ':password'=>$password
-//            ]);
-//        return $query->fetch(PDO::FETCH_ASSOC)['id'];
+
+    public function getUser($email, $password)
+    {
+        return $this->select()->where("email", $email, "password", $password)->execute();
+
     }
-    public function allUsers(){
+
+    public function allUsers()
+    {
         return $this->select()->execute();
-}
+    }
 
 }

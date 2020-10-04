@@ -1,6 +1,5 @@
 <?php
 spl_autoload_register(function ($class) {
-//   echo $class;
     if(file_exists('Controllers' . '/'. $class . '.php')){
         include 'Controllers' . '/'. $class . '.php';
     }else if(file_exists('Classes' . '/'. $class . '.php')){
