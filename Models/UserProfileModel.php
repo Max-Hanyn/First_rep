@@ -9,9 +9,10 @@ class UserProfileModel extends ModelBase
         return 'users_pofiles';
     }
 
-    public function getProfile($id){
+    public function getProfile($id)
+    {
 
-       return $this->select()->innerJoin('users','id','user_id')->where('id',$id)->execute();
+        return $this->select()->innerJoin('users', 'id', 'user_id')->where('id', $id)->execute();
 
     }
 }

@@ -1,33 +1,23 @@
 <?php
 session_start();
 
-//include '../autoload.php';
 class Route
 {
     public static $configurations = [];
 
-
     public static $routes = [];
 
-
-//profile/:id
-//    public static function test($i,$j=1){
-//
-//        echo $i. " ". $j;
-//    }
-//     public static function group($params,$func){
-//
-//        call_user_func($func());
-//
-//
-//
-//     }
-    private static function checkParams($routeToChange)
+    /**
+     * @param string $routeToChange
+     * @return array|bool
+     * check if route have parameters, if true return array with this route and list of his parameters,
+     * else return false
+     */
+    private static function checkParams(string $routeToChange)
     {
         self::$configurations = parse_ini_file("./config/routes.ini");
         $parameters = [];
         if (preg_match('/:.+/', $routeToChange)) {
-// profile/:id
 
             $routeAndParams = explode('/', $routeToChange);
 
@@ -42,32 +32,38 @@ class Route
                     }
                 }
             }
-            $route = implode('/',$routeAndParams);
-            $test = [];
-            array_push($test,$route,$parameters);
-            return $test;
+            $route = implode('/', $routeAndParams);
+            $routeWithParams = [];
+            array_push($routeWithParams, $route, $parameters);
+            return $routeWithParams;
 
         }
         return false;
     }
 
-    public static function set($routeToAdd, $controller, $roleId = RolesModel::ROLE_GUEST_ID)
+    /**
+     * @param string $routeToAdd
+     * @param string $controller
+     * @param int $roleId
+     * add route to list of routes with controller, action, and necessary parameters
+     */
+    public static function set(string $routeToAdd, string $controller, int $roleId = RolesModel::ROLE_GUEST_ID)
     {
 
         $routeAndParams = self::checkParams($routeToAdd);
         $action = explode('.', $controller);
-        if (!$routeAndParams){
-            $route=[
+        if (!$routeAndParams) {
+            $route = [
                 $routeToAdd =>
                     [
                         'controller' => $action[0],
                         'action' => $action[1],
                         'roleId' => $roleId,
                         'params' => []
-                ]
+                    ]
             ];
             self::$routes[] = $route;
-        }else{
+        } else {
 
             $route = [
                 $routeAndParams[0] =>
@@ -83,51 +79,53 @@ class Route
 
 
     }
+
+    /**
+     * check if current url address is in list of routes if true redirect to this url, else redirect to error page
+     */
     public static function check()
     {
         foreach (self::$routes as $route) {
             $key = key($route);
 
 
-
             if (preg_match("#\A$key\z#", $_GET['url'])) {
-//                    print_r($_SESSION);
-//                        print_r($route[$key]['roleId']);
-//                    exit();
 
-               // echo "f";
+                if (Roles::checkRole($route[$key]['roleId']) || $_SESSION['user']['roleId'] == RolesModel::ROLE_ADMIN_ID) {
 
-                if(Roles::checkRole($route[$key]['roleId']) || $_SESSION['user']['roleId'] == RolesModel::ROLE_ADMIN_ID){
-
-//                    echo "!";
-                        $params = self::parseUrl($route[$key]['params']);
-                        $controller = new $route[$key]['controller'];
-                        $action = $route[$key]['action'];
-//                        echo $action;
-                        $controller->$action($params[0],$params[1]);
-                    }else{
-//
+                    $params = self::parseUrl($route[$key]['params']);
+                    $controller = new $route[$key]['controller'];
+                    $action = $route[$key]['action'];
+                    $controller->$action($params[0], $params[1]);
+                } else {
                     self::redirect('forbidden');
 
                 }
-                }
-
             }
+
         }
+    }
 
-
-        public static function parseUrl(Array $params){
-            $url = explode('/',$_GET['url']);
-            $parameters= [];
-            foreach ($params as $param){
-                $parameters[] = $url[$param];
-            }
-            return $parameters;
+    /**
+     * @param array $params
+     * @return array
+     * get from url address necessary parameters
+     */
+    public static function parseUrl(array $params)
+    {
+        $url = explode('/', $_GET['url']);
+        $parameters = [];
+        foreach ($params as $param) {
+            $parameters[] = $url[$param];
         }
+        return $parameters;
+    }
 
-
-
-    public static function redirect($path)
+    /**
+     * @param string $path
+     * redirect user to specified url
+     */
+    public static function redirect(string $path)
     {
         header("Location: http://phpteam.test/$path");
         exit();
