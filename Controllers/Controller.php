@@ -1,41 +1,48 @@
 <?php
 session_start();
+
 class Controller
 {
-    public function view($viewName,array $data = null){
+    public function view($viewName, array $data = null)
+    {
+        if ($data) {
 
-        if ($data){
+            foreach ($data as $variable) {
 
-            foreach ($data as $variable){
+                $key = array_search($variable, $data);
+                $$key = $variable[0];
 
-              $key = array_search($variable,$data);
-
-              $$key = $variable[0];
-
-        }}
+            }
+        }
 
         $pageData = $data;
         include "Views/$viewName.php";
     }
-    public function checkUserRole($checkRole){
-        if (!empty($_SESSION['user']['role'])){
-            foreach ($_SESSION['user']['role'] as $role){
-                if ($role == $checkRole){
+
+    public function checkUserRole($checkRole)
+    {
+        if (!empty($_SESSION['user']['role'])) {
+            foreach ($_SESSION['user']['role'] as $role) {
+                if ($role == $checkRole) {
                     return true;
                 }
-        }
+            }
 
-      }
-      Route::redirect('forbidden');
+        }
+        Route::redirect('forbidden');
     }
-    public function isLoggedOut(){
-        if($_SESSION['user']['roleId'] == RolesModel::ROLE_GUEST_ID) {
+
+    public function isLoggedOut()
+    {
+        if ($_SESSION['user']['roleId'] == RolesModel::ROLE_GUEST_ID) {
 
             Route::redirect('login');
         }
     }
-    public function isLoggedIn(){
-        if(Roles::checkRole(RolesModel::ROLE_USER_ID)) {
+
+    public function isLoggedIn()
+    {
+        if (Roles::checkRole(RolesModel::ROLE_USER_ID)) {
             $id = $_SESSION['user']['id'];
             Route::redirect("profile/$id");
         }

@@ -16,9 +16,12 @@ class LoginController extends Controller
             $email = trim($_POST['email']);
             $password = md5(trim($_POST['password']));
             $userModel = new UserModel();
+
             $user = $userModel->getUser($email, $password);
 
+
             if ($user) {
+
                 $userId = $user[0]['id'];
                 $_SESSION['user']['id'] = $userId;
                 if ($user[0]['verified'] == null) {
@@ -31,7 +34,9 @@ class LoginController extends Controller
                 $_SESSION['wrongData'] = true;
                 Route::redirect('login');
 
+
             }
+
 
         }
         $this->View('login');

@@ -1,6 +1,6 @@
 <?php
 
-class   RegisterController extends Controller
+class RegisterController extends Controller
 {
     public function __construct()
     {
@@ -30,7 +30,7 @@ class   RegisterController extends Controller
             if ($checkEmail == null) {
 
                 $authService = new AuthService();
-                $newUserId = $authService->createNewUser($first_name,$second_name,$email, $password);
+                $newUserId = $authService->createNewUser($first_name, $second_name, $email, $password);
                 $_SESSION['user']['id'] = $newUserId;
 
                 Route::redirect("verify");

@@ -3,34 +3,33 @@
 
 class Roles
 {
-private function getRole($roleId){
-    $roles = [
-        RolesModel::ROLE_GUEST_ID => [RolesModel::ROLE_GUEST_ID],
-        RolesModel::ROLE_ADMIN_ID => [RolesModel::ROLE_ADMIN_ID,RolesModel::ROLE_USER_ID,RolesModel::ROLE_GUEST_ID],
-        RolesModel::ROLE_USER_ID => [RolesModel::ROLE_USER_ID,RolesModel::ROLE_GUEST_ID],
-        RolesModel::ROLE_MODERATOR_ID => [RolesModel::ROLE_MODERATOR_ID,RolesModel::ROLE_USER_ID,RolesModel::ROLE_GUEST_ID],
-        ];
-    return $roles[$roleId];
-}
-
-    static public function checkRole($role)
+    /**
+     * @param int $roleId
+     * @return array
+     * function return array with current role permissions
+     */
+    private static function getRole(int $roleId)
     {
-//        print_r($_SESSION);
-////        exit();
+        $roles = [
+            RolesModel::ROLE_GUEST_ID => [RolesModel::ROLE_GUEST_ID],
+            RolesModel::ROLE_ADMIN_ID => [RolesModel::ROLE_ADMIN_ID, RolesModel::ROLE_USER_ID, RolesModel::ROLE_GUEST_ID],
+            RolesModel::ROLE_USER_ID => [RolesModel::ROLE_USER_ID, RolesModel::ROLE_GUEST_ID],
+            RolesModel::ROLE_MODERATOR_ID => [RolesModel::ROLE_MODERATOR_ID, RolesModel::ROLE_USER_ID, RolesModel::ROLE_GUEST_ID],
+        ];
+        return $roles[$roleId];
+    }
 
+    /**
+     * @param int $role
+     * @return bool
+     * return true if current auth user has necessary role
+     */
+    static public function checkRole(int $role)
+    {
+        $roles = self::getRole($_SESSION['user']['roleId']);
 
-        $roles = (new Roles)->getRole( $_SESSION['user']['roleId']);
+        return in_array($role, $roles);
 
-
-        foreach ($roles as $permission) {
-            if ($permission == $role) {
-
-                return true;
-            }
-
-
-        }
-        return false;
     }
 
 }

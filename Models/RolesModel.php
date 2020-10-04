@@ -1,5 +1,4 @@
 <?php
-//namespace Models;
 
 class RolesModel extends ModelBase
 {
@@ -7,6 +6,7 @@ class RolesModel extends ModelBase
     const ROLE_USER_ID = 2;
     const ROLE_ADMIN_ID = 1;
     const ROLE_MODERATOR_ID = 3;
+
     protected function getTable()
     {
         return "roles";
@@ -31,8 +31,9 @@ class RolesModel extends ModelBase
         return $query->fetch(PDO::FETCH_ASSOC)['name'];
     }
 
-    public function getUserRole($id){
+    public function getUserRole($id)
+    {
 
-        return $this->select('name')->innerJoin('users','role_id','id')->where('users.id',"$id")->execute();
+        return $this->select('name')->innerJoin('users', 'role_id', 'id')->where('users.id', "$id")->execute();
     }
 }

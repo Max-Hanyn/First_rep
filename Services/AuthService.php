@@ -1,8 +1,5 @@
 <?php
-
-
-//namespace Services;
-
+session_start();
 
 class AuthService
 {
@@ -24,8 +21,6 @@ class AuthService
     }
 
 
-
-
     public function checkUserProfile($profileId){
 
         if ($_SESSION['user']['id'] == $profileId ){
@@ -43,14 +38,5 @@ class AuthService
     }
     }
 
-    public static function loggedIn(){
-        if($_SESSION['user']){
-            return true;
-        }else {
 
-            Route::redirect('login');
-
-        }
-
-    }
 }
