@@ -18,6 +18,7 @@ $(document).on('keyup','#search', function () {
         url: "/admin/search",
         type: "POST",
         dataType: "json",
+
         data:{search:search},
         success: function (response) {
 
