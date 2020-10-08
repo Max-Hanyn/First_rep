@@ -78,15 +78,15 @@ include 'layouts/navigataion.php';
                                     </tr>
                                     <tr>
                                         <td class="active">Фамілія:</td>
-                                        <td id="second_name"><?= $pageData['second_name'] ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="active">Адрес:</td>
-                                        <td id="number"><?= $pageData['number'] ?></td>
+                                        <td id="second-name"><?= $pageData['second_name'] ?></td>
                                     </tr>
                                     <tr>
                                         <td class="active">Номер телефону:</td>
                                         <td id="adress"><?= $pageData['adress'] ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="active">Адрес:</td>
+                                        <td id="number"><?= $pageData['number'] ?></td>
                                     </tr>
                                     </tbody>
                                 </table>
