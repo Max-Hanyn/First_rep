@@ -28,15 +28,14 @@ class UserProfileModel extends ModelBase
         $query = $this->link->prepare($sql);
         $query->execute();
         return $query->fetchall();
-//        echo '<pre>';
-//        print_r($query->fetchall());
-//        echo '</pre>';
+
+    }
+
+    public function changeProfileData($id, $profileData){
+
+         $this->update(['first_name' => $profileData['first_name'], 'second_name' => $profileData['second_name'], 'number' => $profileData['number'], 'adress' => $profileData['adress']])
+            ->where('user_id', $id)
+            ->execute();
+
     }
 }
-//SELECT DISTINCT users.email, users.id, users.role_id, users.verified FROM `users` JOIN users_skills
-//        ON users.id = users_skills.user_id JOIN roles ON users.role_id = roles.id
-//        WHERE users.email LIKE '%$search%'
-//        OR users.id LIKE '%$search%'
-//        OR users_skills.level LIKE '%$search%'
-//        OR users_skills.name LIKE '%$search%'
-//        OR users_skills.language LIKE '%$search%'

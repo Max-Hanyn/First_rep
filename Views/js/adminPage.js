@@ -23,8 +23,6 @@ $(document).on('keyup','#search', function () {
         success: function (response) {
 
             fillTable(response);
-            console.log(response);
-
         }
     });
 

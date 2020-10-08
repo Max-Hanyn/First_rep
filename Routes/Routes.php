@@ -3,6 +3,8 @@
 Route::set('profile/logout', 'ProfileController.logout', RolesModel::ROLE_USER_ID);
 Route::set('/', 'HomeController.index');
 Route::set('profile/:id', 'ProfileController.index', RolesModel::ROLE_USER_ID);
+Route::set('profile/:id/change', 'ProfileController.change', RolesModel::ROLE_USER_ID);
+
 Route::set('verify', 'VerifyController.index');
 Route::set('users', 'UserListController.index',RolesModel::ROLE_USER_ID);
 
@@ -21,6 +23,7 @@ Route::set('profile/:id/skills/edit', 'UserSkillsController.edit', RolesModel::R
 Route::set('profile/:id/skills/delete', 'UserSkillsController.delete', RolesModel::ROLE_USER_ID);
 Route::set('login', 'LoginController.login');
 Route::set('forbidden', 'ForbiddenController.index');
+Route::set('profile/photo/add', 'ProfileController.add', RolesModel::ROLE_USER_ID);
 
 Route::set('register', 'RegisterController.registration');
 
