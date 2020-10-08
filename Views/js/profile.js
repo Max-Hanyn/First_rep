@@ -31,6 +31,7 @@ $(document).ready(function(){
             data:data,
             success: function () {
 
+               $('#first-second-name').text(data[0].value+ " " + data[1].value);
                $('#first-name').text(data[0].value);
                $('#second-name').text(data[1].value);
                $('#adress').text(data[2].value);

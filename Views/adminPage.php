@@ -23,6 +23,7 @@ include "layouts/navigataion.php";
                         <thead>
                         <tr>
                             <th scope="col">id</th>
+                            <th scope="col">Image</th>
                             <th scope="col">email</th>
                             <th scope="col">verification</th>
                             <th scope="col">role</th>

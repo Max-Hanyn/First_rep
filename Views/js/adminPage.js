@@ -6,6 +6,7 @@ $(document).ready(function(){
         dataType: "json",
         success: function (response) {
 
+            console.log(response);
             fillTable(response);
 
         }
@@ -22,6 +23,7 @@ $(document).on('keyup','#search', function () {
         data:{search:search},
         success: function (response) {
 
+            console.log(response);
             fillTable(response);
         }
     });
@@ -33,21 +35,22 @@ function fillTable(data) {
         if(values.verified == '1'){
             verefied = 'verefied'
         }else {
-            verefied = '<a href="verify/'+ values.token +'"> Verify </a>'
+            verefied = '<a href="verify/'+ values.token +'" class="btn btn-primary"> Verify </a>'
         }
         $("tbody").append('<tr class="column-row">' +
             '<td>' + values.id +'</td>' +
+            '<td> <img src="'+data['path']+ values.photo_name+'" alt="avatar"></td>'+
             '<td>'+ values.email +'</td>' +
             '<td>'+ verefied +'</td>' +
             '<td>' + values.name + '<form  action="admin/changerole" method="post">' +
-            '<p><select name="role" size="3" class="select-role">' +
+            '<p><select name="role" size="3" class="select-role form-control">' +
             '<option disabled>Roles</option>' +
             ''+
             '</select></p>' +
-            '<p><input type="submit" value="Add role"></p>' +
+            '<p><input type="submit" value="Add role" class="btn btn-primary"></p>' +
             ' <input type="hidden" name="userId" value="'+ values.id +'">' +
             '</form>' +'</td>' +
-            '<td>' + '<a href="admin/edit/'+ values.id +'">Edit</a>' + '</td>' +
+            '<td>' + '<a href="admin/edit/'+ values.id +'" class="btn btn-primary">Edit</a>' + '</td>' +
             '</tr>')
 
 

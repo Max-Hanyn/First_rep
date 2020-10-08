@@ -12,12 +12,12 @@ class UserProfileModel extends ModelBase
     public function getProfile($id)
     {
 
-        return $this->select()->innerJoin('users', 'id', 'user_id')->where('id', $id)->execute();
+        return $this->select()->innerJoin('users', 'id', 'user_id')->where('users.id', $id)->execute();
 
     }
     public function search($search){
-        $sql = ("SELECT DISTINCT users.email, users.id, users.role_id, users.verified, roles.name FROM `users` LEFT JOIN users_skills 
-        ON users.id = users_skills.user_id JOIN roles ON users.role_id = roles.id
+        $sql = ("SELECT DISTINCT users.email, users.id, users.role_id, users.verified, users.token, roles.name, users_photos.photo_name FROM `users` LEFT JOIN users_skills 
+        ON users.id = users_skills.user_id JOIN roles ON users.role_id = roles.id JOIN users_photos ON users_photos.user_id = users.id AND users_photos.is_main = '1'
         WHERE users.email LIKE '%$search%'
         OR users.id LIKE '%$search%' 
         OR roles.name LIKE '%$search%' 
@@ -38,4 +38,6 @@ class UserProfileModel extends ModelBase
             ->execute();
 
     }
+
+
 }

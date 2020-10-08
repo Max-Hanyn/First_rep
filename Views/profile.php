@@ -34,13 +34,8 @@ include 'layouts/navigataion.php';
                         <div class="text-center" id="author">
 
 
-                            <img src="<?php
-                            if (!empty($avatar)) {
-                                echo $path . $avatar['photo_name'];
-                            } else {
-                                echo $path . 'nophoto.jpg';
-                            } ?>" class="" alt="avatar">
-                            <h3><?= $pageData['first_name'] . " " . $pageData['second_name'] ?></h3>
+                            <img src="<?php echo $path . $avatar['photo_name']; ?>" class="" alt="avatar">
+                            <div id="first-second-name"><?= $pageData['first_name'] . " " . $pageData['second_name'] ?></div>
 
                         </div>
                     </div>

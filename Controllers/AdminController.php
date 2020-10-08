@@ -10,12 +10,14 @@ class AdminController extends Controller
 
     public function index()
     {
+        $config = parse_ini_file("./config/photos.ini");
+        $path = $config['Path'];
         $userModel = new UserModel();
 
         $rolesModel = new RolesModel();
         $roles = $rolesModel->select()->execute();
         $users = $userModel->select('users.id,email,token,verified,name')->innerJoin('roles', 'id', 'role_id')->execute();
-        $this->view('adminPage', ['users' => [$users], 'roles' => [$roles]]);
+        $this->view('adminPage', ['users' => [$users], 'roles' => [$roles],'path' => [$path]]);
 
     }
 
@@ -48,20 +50,24 @@ class AdminController extends Controller
     }
 
     public function get(){
-        $userModel = new UserModel();
+        $config = parse_ini_file("./config/photos.ini");
+        $path = $config['Path'];
+        $usersModel = new UserModel();
         $rolesModel = new RolesModel();
         $roles = $rolesModel->select()->execute();
-        $users = $userModel->select('users.id,email,token,verified,name')->innerJoin('roles', 'id', 'role_id')->execute();
-        $response = ['roles' => $roles,'users' => $users];
+        $users = $usersModel->getUsersWith();
+        $response = ['roles' => $roles,'users' => $users, 'path' => $path];
         return print_r(json_encode($response));
     }
     public function search(){
 
+        $config = parse_ini_file("./config/photos.ini");
+        $path = $config['Path'];
         $userModel = new UserProfileModel();
         $rolesModel = new RolesModel();
         $roles = $rolesModel->select()->execute();
         $users = $userModel->search($_POST['search']);
-        $response = ['roles' => $roles,'users' => $users];
+        $response = ['roles' => $roles,'users' => $users, 'path' => $path];
         return print_r(json_encode($response));
 
     }

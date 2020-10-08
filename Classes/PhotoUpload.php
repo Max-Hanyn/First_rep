@@ -62,11 +62,14 @@ class PhotoUpload
     }
 
     public static function deletePhoto($photoName){
-
         $configurations = self::config();
-        $path = $configurations['filePath'];
+        if ($photoName != $configurations['photoName']){
 
-        unlink($path.$photoName);
+            $path = $configurations['filePath'];
+
+            unlink($path.$photoName);
+        }
+
 
     }
 

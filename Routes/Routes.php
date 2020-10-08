@@ -1,6 +1,6 @@
 <?php
 
-Route::set('profile/logout', 'ProfileController.logout', RolesModel::ROLE_USER_ID);
+Route::set('profile/logout', 'ProfileController.logout');
 Route::set('/', 'HomeController.index');
 Route::set('profile/:id', 'ProfileController.index', RolesModel::ROLE_USER_ID);
 Route::set('profile/:id/change', 'ProfileController.change', RolesModel::ROLE_USER_ID);
