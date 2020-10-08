@@ -4,7 +4,7 @@
 class PhotoUpload
 {
 
-    private static function config(){
+    public static function config(){
 
         return parse_ini_file("./config/photos.ini");
     }

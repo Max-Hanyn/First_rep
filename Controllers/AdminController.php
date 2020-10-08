@@ -37,8 +37,12 @@ class AdminController extends Controller
         }
 
 
+        $userAvatar = new UsersPhotoModel();
+        $avatar = $userAvatar->getUserAvatar($id);
         $user = $userProfileModel->getProfile($id);
-        $this->view('adminEdit', ['user' => $user, 'massage' => $massage]);
+        $photoConfig = PhotoUpload::config();
+
+        $this->view('adminEdit', ['user' => $user, 'massage' => $massage,'avatar' => $avatar,'path' => [$photoConfig['Path']]]);
     }
 
     public function changeRole()
@@ -69,6 +73,15 @@ class AdminController extends Controller
         $users = $userModel->search($_POST['search']);
         $response = ['roles' => $roles,'users' => $users, 'path' => $path];
         return print_r(json_encode($response));
+
+    }
+    public function photoChange($id){
+
+        $userPhotoModel = new UsersPhotoModel();
+        $currentUserAvatar = $userPhotoModel->getUserAvatar($id);
+        PhotoUpload::deletePhoto($currentUserAvatar[0]['photo_name']);
+        $photo = PhotoUpload::uploadPhoto();
+        $userPhotoModel->changeAvatar($photo, $id);
 
     }
 }
