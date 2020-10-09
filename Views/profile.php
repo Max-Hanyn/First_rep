@@ -87,7 +87,7 @@ include 'layouts/navigataion.php';
                                 </table>
                             </div>
                             <div class="tab-pane fade" id="contact">
-                                <p></p>
+                                <h3>Дані профілю</h3>
                                 <form role="form" id="changeProfileForm" method="post">
                                     <div class="form-group">
                                         <label>Ім'я</label>
@@ -115,7 +115,53 @@ include 'layouts/navigataion.php';
                                         </button>
                                     </div>
                                 </form>
+                                <div>
+                                    <h3> Дані акаунту </h3>
+                                    <form role="form" id="changeEmailForm" method="post">
+
+                                        <div class="form-group">
+                                            <label>Емейл</label>
+                                            <input type="email" name="email" class="form-control rounded"
+                                                   value="<?= $pageData['email'] ?>">
+                                        </div>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-success" data-original-title=""
+                                            title="">
+                                        Змінити
+                                    </button>
+                                </div>
+                                    </form>
+                                    <form role="form" id="changePasswordForm" method="post">
+
+                                        <div class="form-group">
+                                            <label>Старий пароль</label>
+                                            <input type="password" name="oldPassword" class="form-control rounded"
+                                                   value="">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Новий пароль</label>
+                                            <input type="password" name="newPassword" class="form-control rounded"
+                                                   value="">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Новий пароль підтвердження</label>
+                                            <input type="password" name="newPasswordConfirm"
+                                                   class="form-control rounded"
+                                                   value="">
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-success" data-original-title=""
+                                                    title="">
+                                                Змінити
+                                            </button>
+                                        </div>
+                                    </form>
+
+                                </div>
                             </div>
+
+
                         </div>
                     </div>
 

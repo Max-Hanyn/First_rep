@@ -28,9 +28,12 @@ abstract class ModelBase
      */
     public function update(array $data)
     {
+
+
         $update = "";
-        foreach ($data as $colum) {
-            $update.= array_search($colum,$data)."=:". array_search($colum,$data) . ",";
+        $valuesArray = array_keys($data);
+        foreach ($valuesArray as $column) {
+            $update.= $column."=:". $column . ",";
         }
         $update = substr($update, 0, -1);
         $this->sql = "UPDATE `{$this->getTable()}` SET {$update}";

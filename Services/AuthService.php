@@ -43,6 +43,16 @@ class AuthService
             return false;
         }
     }
+    public static function isModerator(){
+
+        if ( $_SESSION['user']['roleId'] == RolesModel::ROLE_MODERATOR_ID){
+
+            return true;
+
+        } else {
+            return false;
+        }
+    }
 
 
 }

@@ -9,7 +9,8 @@ class VerifyController extends Controller
 
     public function index()
     {
-        $this->isLoggedIn();
+
+        $this->isGuest();
         $this->view('verify');
     }
 

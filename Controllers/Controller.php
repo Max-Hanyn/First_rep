@@ -48,4 +48,14 @@ class Controller
         }
     }
 
+    public function isGuest(){
+
+        if (is_null($_SESSION['user']['id'])){
+
+            Route::redirect("forbidden");
+
+        }
+
+    }
+
 }

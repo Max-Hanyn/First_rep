@@ -1,11 +1,15 @@
 <?php
 
 Route::set('profile/logout', 'ProfileController.logout');
-Route::set('/', 'HomeController.index');
+Route::set('/', 'LoginController.login');
 Route::set('profile/:id', 'ProfileController.index', RolesModel::ROLE_USER_ID);
 Route::set('profile/:id/change', 'ProfileController.change', RolesModel::ROLE_USER_ID);
 
 Route::set('verify', 'VerifyController.index');
+Route::set('reset', 'ResetPasswordController.index');
+Route::set('reset/send', 'ResetPasswordController.sendReset');
+
+
 Route::set('users', 'UserListController.index',RolesModel::ROLE_USER_ID);
 
 Route::set('verify/resent', 'VerifyController.resent');
@@ -28,5 +32,19 @@ Route::set('forbidden', 'ForbiddenController.index');
 Route::set('profile/photo/add', 'ProfileController.add', RolesModel::ROLE_USER_ID);
 
 Route::set('register', 'RegisterController.registration');
+
+Route::set('email/change', 'ProfileController.changeEmail', RolesModel::ROLE_USER_ID);
+Route::set('email/change/:token', 'EmailChangeController.changeEmail', RolesModel::ROLE_USER_ID);
+Route::set('password/reset/:token', 'ResetPasswordController.changePassword');
+
+
+Route::set('password/change', 'ProfileController.changePassword', RolesModel::ROLE_USER_ID);
+
+
+Route::set('register', 'RegisterController.registration');
+
+
+
+
 
 Route::check();

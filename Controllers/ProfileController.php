@@ -81,4 +81,68 @@ class ProfileController extends Controller
 
     }
 
+    public function changeEmail(){
+
+        $email = $_POST['email'];
+        $userModel = new UserModel();
+        $userModel->checkUser($email);
+        if (empty($userModel->checkUser($email))){
+
+
+            $token = EmailVerifyService::createToken();
+            $userModel->update(['new_email' => $email, 'token' => $token])->where('id',$_SESSION['user']['id'])->execute();
+            EmailVerifyService::sendEmailChange($email, $token);
+
+            return print_r(json_encode(['success' => true]));
+
+        } else {
+
+            return print_r(json_encode(['success' => false]));
+
+        }
+
+    }
+
+    public function changePassword(){
+
+        $oldPassword = $_POST['oldPassword'];
+        $newPassword = $_POST['newPassword'];
+        $newPasswordConfirm = $_POST['newPasswordConfirm'];
+
+        if (!empty($oldPassword) && !empty($newPassword) && !empty($newPasswordConfirm)) {
+
+
+            if ($newPassword == $newPasswordConfirm) {
+
+                $userModel = new UserModel();
+                $currentId = $_SESSION['user']['id'];
+                $user = $userModel->select()->where('id', $currentId)->execute();
+
+                if (md5(trim($oldPassword)) == $user[0]['password']) {
+
+                    if (md5(trim($newPassword)) != $user[0]['password']) {
+
+                        $userModel->update(['password' => md5(trim($newPassword))])->where('id', $currentId)->execute();
+
+                        return print_r(json_encode(['success' => true,'msg' => 'changed password success']));
+
+                    } else {
+
+                        return print_r(json_encode(['success' => false,'msg' => 'password must be other than old password']));
+                    }
+
+                } else {
+
+                    return print_r(json_encode(['success' => false,'msg' => 'old password wrong']));
+                }
+
+            } else {
+
+                return print_r(json_encode(['success' => false,'msg' => 'new passwords different']));
+
+            }
+
+        }
+    }
+
 }
