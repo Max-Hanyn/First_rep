@@ -43,9 +43,9 @@ class AuthService
             return false;
         }
     }
-    public static function isModerator(){
+    public static function hasRole($role){
 
-        if ( $_SESSION['user']['roleId'] == RolesModel::ROLE_MODERATOR_ID){
+        if ( $_SESSION['user']['roleId'] == $role){
 
             return true;
 

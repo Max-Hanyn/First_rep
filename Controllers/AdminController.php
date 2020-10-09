@@ -60,7 +60,8 @@ class AdminController extends Controller
         $rolesModel = new RolesModel();
         $roles = $rolesModel->select()->execute();
         $users = $usersModel->getUsersWith();
-        $response = ['roles' => $roles,'users' => $users, 'path' => $path];
+        $userRole = $_SESSION['user']['roleId'];
+        $response = ['roles' => $roles,'users' => $users, 'path' => $path,'role' => $userRole];
         return print_r(json_encode($response));
     }
     public function search(){
