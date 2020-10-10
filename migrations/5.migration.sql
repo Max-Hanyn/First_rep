@@ -1,0 +1,2 @@
+CREATE TABLE `users_info`. ( `id` INT(100) NOT NULL AUTO_INCREMENT , `name` VARCHAR(100) NOT NULL , `level` VARCHAR(100) NOT NULL , `language` VARCHAR(100) NOT NULL , `user_id` INT(100) NOT NULL , PRIMARY KEY (`id`), INDEX (`user_id`))
+ALTER TABLE `users_skills` ADD FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
