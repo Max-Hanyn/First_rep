@@ -28,15 +28,6 @@ class UserProfileModel extends ModelBase
         $query = $this->link->prepare($sql);
         $query->execute();
         return $query->fetchall();
-//        echo '<pre>';
-//        print_r($query->fetchall());
-//        echo '</pre>';
+
     }
 }
-//SELECT DISTINCT users.email, users.id, users.role_id, users.verified FROM `users` JOIN users_skills
-//        ON users.id = users_skills.user_id JOIN roles ON users.role_id = roles.id
-//        WHERE users.email LIKE '%$search%'
-//        OR users.id LIKE '%$search%'
-//        OR users_skills.level LIKE '%$search%'
-//        OR users_skills.name LIKE '%$search%'
-//        OR users_skills.language LIKE '%$search%'
