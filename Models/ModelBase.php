@@ -125,4 +125,13 @@ abstract class ModelBase
         $this->sql = $sql;
         return $this;
     }
+    public function in(array $array){
+        $values = '';
+        foreach ($array as $key){
+            $values.= $key.',';
+        }
+        $values = substr($values, 0, -1);
+        $this->sql.="IN ($values)";
+        return $this;
+    }
 }

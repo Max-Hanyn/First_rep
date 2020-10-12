@@ -5,7 +5,7 @@ class AdminController extends Controller
 {
     public function __construct()
     {
-//        $this->isLoggedIn();
+
     }
 
     public function index()
@@ -41,10 +41,30 @@ class AdminController extends Controller
 
     public function changeRole()
     {
-        if(!empty($_POST['role'])) {
-            $userModel = new UserModel();
-            $userModel->update(['role_id' => $_POST['role']])->where('id', $_POST['userId'])->execute();
-            Route::redirect('admin');
-        }
+        $userModel = new UserModel();
+        $userModel->update(['role_id' => $_POST['role']])->where('id', $_POST['userId'])->execute();
+        Route::redirect('admin');
+
+    }
+
+    public function get(){
+        $userModel = new UserModel();
+        $rolesModel = new RolesModel();
+        $roles = $rolesModel->select()->execute();
+        $users = $userModel->select('users.id,email,token,verified,name')->innerJoin('roles', 'id', 'role_id')->execute();
+        $response = ['roles' => $roles,'users' => $users];
+        echo json_encode($response);
+        return;
+    }
+    public function search(){
+
+        $userModel = new UserProfileModel();
+        $rolesModel = new RolesModel();
+        $roles = $rolesModel->select()->execute();
+        $users = $userModel->search($_POST['search']);
+        $response = ['roles' => $roles,'users' => $users];
+        echo json_encode($response);
+        return;
+
     }
 }

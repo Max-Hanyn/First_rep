@@ -8,10 +8,6 @@ class LoginController extends Controller
         $this->isLoggedIn();
     }
 
-    public function index()
-    {
-
-    }
 
     public function login()
     {
