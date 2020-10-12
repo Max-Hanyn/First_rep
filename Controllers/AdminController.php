@@ -53,7 +53,8 @@ class AdminController extends Controller
         $roles = $rolesModel->select()->execute();
         $users = $userModel->select('users.id,email,token,verified,name')->innerJoin('roles', 'id', 'role_id')->execute();
         $response = ['roles' => $roles,'users' => $users];
-        return print_r(json_encode($response));
+        echo json_encode($response);
+        return;
     }
     public function search(){
 
@@ -62,7 +63,8 @@ class AdminController extends Controller
         $roles = $rolesModel->select()->execute();
         $users = $userModel->search($_POST['search']);
         $response = ['roles' => $roles,'users' => $users];
-        return print_r(json_encode($response));
+        echo json_encode($response);
+        return;
 
     }
 }

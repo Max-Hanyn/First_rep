@@ -2,7 +2,6 @@ $(document).ready(function(){
 
     $.ajax({
         url: "/admin/get",
-        type: "POST",
         dataType: "json",
         success: function (response) {
 
@@ -23,6 +22,7 @@ $(document).on('keyup','#search', function () {
         success: function (response) {
 
             fillTable(response);
+
         }
     });
 
