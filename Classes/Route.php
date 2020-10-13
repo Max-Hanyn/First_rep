@@ -127,7 +127,7 @@ class Route
      */
     public static function redirect(string $path)
     {
-        header("Location: http://phpteam.test/$path");
+        header("Location:/$path");
         exit();
     }
 }

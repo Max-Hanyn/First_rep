@@ -7,6 +7,10 @@ abstract class ModelBase
     protected $sql = '';
     protected $data = [];
 
+    private $host = 'localhost';
+    private $dbname = 'u467801509_php_team';
+    private $username = 'u467801509_MaC9HbKa12';
+    private $paswword = 'MaC9HbKa12';
     /**
      * @return string
      */
@@ -17,7 +21,7 @@ abstract class ModelBase
     }
 
     public function connection(){
-        $this->link = new PDO('mysql:host=localhost;dbname=users_info', 'root', '');
+        $this->link = new PDO("mysql:host=$this->host;dbname=$this->dbname", "$this->username", "$this->paswword");
         return $this;
     }
 
