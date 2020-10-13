@@ -2,11 +2,9 @@ $(document).ready(function(){
 
     $.ajax({
         url: "/admin/get",
-        type: "POST",
         dataType: "json",
         success: function (response) {
 
-            console.log(response);
             fillTable(response);
 
         }
@@ -23,8 +21,8 @@ $(document).on('keyup','#search', function () {
         data:{search:search},
         success: function (response) {
 
-            console.log(response);
             fillTable(response);
+
         }
     });
 
@@ -60,7 +58,7 @@ function fillTable(data) {
     })
     console.log(data.role);
     if (data.role == 1){
-    
+
         $(data.roles).each(function (row,values) {
             $('<option value="'+ values.id +'">'+ values.name +'</option>').appendTo(".select-role");
         })
