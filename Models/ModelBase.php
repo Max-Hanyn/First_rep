@@ -69,13 +69,14 @@ abstract class ModelBase
      */
     public function insert(array $data){
 
+        $valuesArray = array_keys($data);
         $insert = "";
         $values = '';
 
-        foreach ($data as $colum) {
+        foreach ($valuesArray as $colum) {
 
-            $values.= ':'.array_search($colum,$data) .",";
-            $insert.= array_search($colum,$data).",";
+            $values.= ':'.$colum .",";
+            $insert.= $colum.",";
 
        }
         $insert = substr($insert, 0, -1);
@@ -90,6 +91,7 @@ abstract class ModelBase
      * execute sql string
      */
     public function execute(){
+
 
         $query = $this->link->prepare($this->sql);
         $query->execute($this->data);

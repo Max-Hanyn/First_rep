@@ -15,7 +15,7 @@ class Controller
             }
         }
 
-        $pageData = $data;
+
         include "Views/$viewName.php";
     }
 

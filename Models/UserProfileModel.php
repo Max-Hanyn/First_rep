@@ -30,4 +30,12 @@ class UserProfileModel extends ModelBase
         return $query->fetchall();
 
     }
+
+    public function changeProfileData($id, $profileData){
+
+         $this->update(['first_name' => $profileData['first_name'], 'second_name' => $profileData['second_name'], 'number' => $profileData['number'], 'adress' => $profileData['adress']])
+            ->where('user_id', $id)
+            ->execute();
+
+    }
 }
